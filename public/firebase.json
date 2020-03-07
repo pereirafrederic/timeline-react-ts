@@ -1,0 +1,6 @@
+{
+  "hosting": {
+    "site": "fpe-timeline-react",
+    "public": "public"
+  }
+}
