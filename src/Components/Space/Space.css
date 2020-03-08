@@ -1,0 +1,49 @@
+.Space {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.Space_empty {
+  color: red;
+}
+.Space_notEmpty {
+  color: green;
+}
+
+.side__top {
+  background-color: hotpink;
+  min-height: 1vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-items: flex-end;
+  align-content: flex-end;
+  justify-content: center;
+}
+
+.side__bottom {
+  background-color: red;
+  min-height: 1vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-items: flex-start;
+  align-content: flex-start;
+  justify-content: center;
+}
+
+.side__center {
+  background-color: lawngreen;
+  min-height: 97vh;
+  display: flex;
+  min-width: 1vw;
+}
+
+.pointeur {
+  padding: 5px;
+  cursor: pointer;
+}
