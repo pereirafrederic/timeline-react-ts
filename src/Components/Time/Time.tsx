@@ -2,16 +2,16 @@ import * as React from "react";
 import { Card, Col, Row } from "antd";
 
 import "./Time.css";
+import { ITime } from "../../models/Models";
 
 interface IProps {
-  time: any;
+  time: ITime;
 }
 
 interface IState {}
 
 export default class Time extends React.Component<IProps, IState> {
   public render() {
-    const { time } = this.props;
     return (
       <div className="Time">
         <div className="site-card-wrapper">

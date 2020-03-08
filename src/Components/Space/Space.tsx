@@ -1,20 +1,22 @@
 import * as React from "react";
 import {
-  //AppstoreAddOutlined,
+  AppstoreAddOutlined,
   FastBackwardOutlined,
   StepBackwardOutlined,
   CaretLeftOutlined,
   CaretRightOutlined,
   StepForwardOutlined,
-  FastForwardOutlined,
-  ClockCircleOutlined
+  FastForwardOutlined
 } from "@ant-design/icons";
 
 import "./Space.css";
+
+//
+import { ISpace, ITime } from "../../models/Models";
 import Time from "../Time/Time";
 
 interface IProps {
-  times: Array<any>;
+  space?: ISpace;
 }
 
 interface IState {}
@@ -25,16 +27,18 @@ export default class Space extends React.Component<IProps, IState> {
   }
 
   public renderEmpty() {
-    // <AppstoreAddOutlined onClick={e => this.addTime()} />
     return (
       <div className="Space_empty">
         <h2>Votre espace est vide</h2>
-        <div className="center"></div>
+        <div className="center">
+          <AppstoreAddOutlined onClick={e => this.addTime()} />
+        </div>
       </div>
     );
   }
 
   public renderNotEmpty() {
+    const { space } = this.props;
     return (
       <div className="Space_notEmpty">
         <div className="side__top">
@@ -43,7 +47,7 @@ export default class Space extends React.Component<IProps, IState> {
           <CaretLeftOutlined rotate={90} />
         </div>
         <div className="side__center">
-          {this.props.times.map((time: any) => (
+          {space?.times.map((time: ITime) => (
             <Time time={time} />
           ))}
         </div>
@@ -57,6 +61,13 @@ export default class Space extends React.Component<IProps, IState> {
   }
 
   public render() {
-    return <div className="Space">{this.renderNotEmpty()}</div>;
+    const { space } = this.props;
+    return (
+      <div className="Space">
+        <h2>{space?.nom}</h2>
+        {!space?.times && this.renderEmpty()}
+        {space?.times && this.renderNotEmpty()}
+      </div>
+    );
   }
 }

@@ -22,11 +22,7 @@ function App() {
         <Router>
           <div className="App__routes">
             <Switch>
-              <Route
-                exact
-                path={"/"}
-                render={() => <Space times={["el1", "el2"]} />}
-              />
+              <Route exact path={"/"} render={() => <Space />} />
 
               <Route render={() => <Redirect push to={"/"} />} />
             </Switch>
