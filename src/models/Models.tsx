@@ -7,13 +7,12 @@ export interface ITime extends INominatif {
   indiceDepart: Number;
   taille: Number;
   fils: Array<ITime>;
-  evenements: Array<Ievenement>;
+  evenements: Array<IEvenement>;
 }
 
-export interface Ievenement extends INominatif {
+export interface IEvenement extends INominatif {
   indiceDepart: Number;
   taille: Number;
-  times: Array<ITime>;
 }
 
 interface INominatif {

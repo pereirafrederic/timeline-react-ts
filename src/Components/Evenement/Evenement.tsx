@@ -1,12 +1,11 @@
 import * as React from "react";
-
 import "./Evenement.css";
-import { Ievenement } from "../../models/Models";
+import { IEvenement } from "../../models/Models";
 
 //
 
 interface IProps {
-  evenement: Ievenement;
+  evenement: IEvenement;
 }
 
 interface IState {}
@@ -16,7 +15,10 @@ export default class Evenement extends React.Component<IProps, IState> {
     const { evenement } = this.props;
     return (
       <div className="Evenement">
-        <h2>{evenement.nom}</h2>
+         <div className="Evenement__header">
+        <h2>{evenement.nom} </h2>
+        <h3>{`${evenement.indiceDepart} - ${evenement.taille}`} </h3>
+        </div>
       </div>
     );
   }

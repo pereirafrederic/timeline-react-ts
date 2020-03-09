@@ -10,6 +10,68 @@ import {
 
 import "./App.css";
 import Space from "./Components/Space/Space";
+import { ISpace } from "./models/Models";
+
+const space: ISpace = {
+  nom :"espace nom",
+  taille : 25,
+  times :[
+    {
+      nom : "time 1",
+      indiceDepart : 1,
+      taille: 5,
+      evenements : [
+       
+      ],
+      fils :[
+        {
+          nom : "time 1-1",
+          indiceDepart : 1,
+          taille: 5,
+          evenements : [ {
+            nom :"evenement 1*1",
+            indiceDepart : 1,
+            taille : 2,
+          },{
+            nom :"evenement 1*2",
+            indiceDepart : 3,
+            taille : 2,
+          }],
+          fils: []
+        },{
+          nom : "time 1-2",
+          indiceDepart : 1,
+          taille: 5,
+          evenements : [ {
+            nom :"evenement 1*1",
+            indiceDepart : 1,
+            taille : 2,
+          },{
+            nom :"evenement 1*2",
+            indiceDepart : 3,
+            taille : 2,
+          }],
+          fils: []
+        }
+      ]
+    },
+    {
+      nom :"time 2",
+      indiceDepart : 1,
+      taille: 2,
+      evenements:[{
+        nom : "eve 1-1-1-1",
+        indiceDepart : 1,
+        taille : 2,
+      },{
+        nom : "eve 1-1-1-2",
+        indiceDepart : 1,
+        taille : 1,
+      }],
+      fils: []
+    }
+  ]
+}
 
 function App() {
   return (
@@ -22,7 +84,7 @@ function App() {
         <Router>
           <div className="App__routes">
             <Switch>
-              <Route exact path={"/"} render={() => <Space />} />
+              <Route exact path={"/"} render={() => <Space space={space}/>} />
 
               <Route render={() => <Redirect push to={"/"} />} />
             </Switch>

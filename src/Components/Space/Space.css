@@ -1,11 +1,18 @@
 .Space {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   min-height: 100vh;
   min-width: 100vw;
 }
 
-.Space_empty {
+.Space__header{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border: 5px solid red;
+}
+
+.Space___content__empty {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -14,8 +21,9 @@
   justify-content: center;
   text-align: center;
 }
-.Space_notEmpty {
-  color: green;
+.Space__content__times {
+  border: 5px solid red;
+  
 }
 
 .side__top {
@@ -43,8 +51,12 @@
 }
 
 .side__center {
+  display: flex;
+  flex-direction: column;
   background-color: lawngreen;
   min-height: 97vh;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   min-width: 1vw;
 }

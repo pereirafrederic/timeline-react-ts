@@ -28,10 +28,10 @@ export default class Space extends React.Component<IProps, IState> {
 
   public renderEmpty() {
     return (
-      <div className="Space_empty">
+      <div className="Space___content__empty">
         <h2>Votre espace est vide</h2>
         <div className="center">
-          <AppstoreAddOutlined onClick={e => this.addTime()} />
+          <AppstoreAddOutlined onClick={(e:any) => this.addTime()} />
         </div>
       </div>
     );
@@ -40,7 +40,7 @@ export default class Space extends React.Component<IProps, IState> {
   public renderNotEmpty() {
     const { space } = this.props;
     return (
-      <div className="Space_notEmpty">
+      <div className="Space__content__times">
         <div className="side__top">
           <FastBackwardOutlined rotate={90} className="pointer" />
           <StepBackwardOutlined rotate={90} className="pointer" />
@@ -64,10 +64,13 @@ export default class Space extends React.Component<IProps, IState> {
     const { space } = this.props;
     return (
       <div className="Space">
+        <div className="Space__header">
         <h2>{space?.nom}</h2>
+        <h3>{space?.taille}</h3>
+        </div>
         {!space?.times && this.renderEmpty()}
-        {space?.times && this.renderNotEmpty()}
-      </div>
+        {space?.times && this.renderNotEmpty()}</div>
+      
     );
   }
 }
