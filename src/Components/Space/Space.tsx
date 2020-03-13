@@ -1,12 +1,6 @@
 import * as React from "react";
 import {
   AppstoreAddOutlined,
-  FastBackwardOutlined,
-  StepBackwardOutlined,
-  CaretLeftOutlined,
-  CaretRightOutlined,
-  StepForwardOutlined,
-  FastForwardOutlined
 } from "@ant-design/icons";
 
 import "./Space.css";
@@ -41,20 +35,11 @@ export default class Space extends React.Component<IProps, IState> {
     const { space } = this.props;
     return (
       <div className="Space__content__times">
-        <div className="side__top">
-          <FastBackwardOutlined rotate={90} className="pointer" />
-          <StepBackwardOutlined rotate={90} className="pointer" />
-          <CaretLeftOutlined rotate={90} />
-        </div>
+
         <div className="side__center">
           {space?.times.map((time: ITime) => (
             <Time time={time} />
           ))}
-        </div>
-        <div className="side__bottom">
-          <CaretRightOutlined rotate={90} className="pointer" />
-          <StepForwardOutlined rotate={90} className="pointer" />
-          <FastForwardOutlined rotate={90} className="pointer" />
         </div>
       </div>
     );

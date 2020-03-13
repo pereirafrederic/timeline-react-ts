@@ -9,8 +9,10 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import Space from "./Components/Space/Space";
-import { ISpace } from "./models/Models";
+import Univers from "./Components/Univers/Univers";
+import { ISpace, IUnivers } from "./models/Models";
+
+
 
 const space: ISpace = {
   nom :"espace nom",
@@ -73,6 +75,12 @@ const space: ISpace = {
   ]
 }
 
+const univers: IUnivers = {
+  nom :"univers 1",
+  taille: 15651,
+  spaces: [space, space]
+}
+
 function App() {
   return (
     <div className="App">
@@ -84,7 +92,7 @@ function App() {
         <Router>
           <div className="App__routes">
             <Switch>
-              <Route exact path={"/"} render={() => <Space space={space}/>} />
+              <Route exact path={"/"} render={() => <Univers univers={univers}/>} />
 
               <Route render={() => <Redirect push to={"/"} />} />
             </Switch>
