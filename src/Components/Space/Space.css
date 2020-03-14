@@ -4,7 +4,7 @@
   flex-grow: 1;
 }
 
-.Space__header{
+.Space__header {
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -20,5 +20,4 @@
 }
 .Space__content__times {
   border: 5px solid white;
-  
 }

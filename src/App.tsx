@@ -12,74 +12,104 @@ import "./App.css";
 import Univers from "./Components/Univers/Univers";
 import { ISpace, IUnivers } from "./models/Models";
 
-
-
 const space: ISpace = {
-  nom :"espace nom",
-  taille : 25,
-  times :[
+  id: 1,
+  nom: "espace nom",
+  taille: 25,
+  evenements: [
     {
-      nom : "time 1",
-      indiceDepart : 1,
-      taille: 5,
-      evenements : [
-       
-      ],
-      fils :[
+      id: 6,
+      nom: "ev 3",
+      indiceDepart: 1,
+      taille: 47,
+      idTime: 456
+    }
+  ]
+};
+
+const univers: IUnivers = {
+  id: 2,
+  nom: "univers 1",
+  taille: 15651,
+  spaces: [
+    {
+      id: 3,
+      nom: "space 1",
+      taille: 147,
+      evenements: [
         {
-          nom : "time 1-1",
-          indiceDepart : 1,
-          taille: 5,
-          evenements : [ {
-            nom :"evenement 1*1",
-            indiceDepart : 1,
-            taille : 2,
-          },{
-            nom :"evenement 1*2",
-            indiceDepart : 3,
-            taille : 2,
-          }],
+          id: 4,
+          nom: "ev 1",
+          indiceDepart: 1,
+          taille: 100,
+          idTime: 147
+        },
+        {
+          id: 5,
+          nom: "ev 2",
+          indiceDepart: 1,
+          taille: 258,
+          idTime: 258
+        }
+      ]
+    },
+    space
+  ],
+  times: [
+    {
+      id: 789,
+      nom: "time 1",
+      indiceDepart: 1,
+      taille: 25,
+      fils: [
+        {
+          id: 369,
+          nom: "time 12",
+          indiceDepart: 1,
+          taille: 25,
           fils: []
-        },{
-          nom : "time 1-2",
-          indiceDepart : 1,
-          taille: 5,
-          evenements : [ {
-            nom :"evenement 1*1",
-            indiceDepart : 1,
-            taille : 2,
-          },{
-            nom :"evenement 1*2",
-            indiceDepart : 3,
-            taille : 2,
-          }],
+        },
+        {
+          id: 258,
+          nom: "time 13",
+          indiceDepart: 1,
+          taille: 25,
+          fils: [
+            {
+              id: 2581,
+              nom: "time 131",
+              indiceDepart: 1,
+              taille: 25,
+              fils: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 456,
+      nom: "time 2",
+      indiceDepart: 1,
+      taille: 25,
+      fils: [
+        {
+          id: 147,
+          nom: "time 21",
+          indiceDepart: 1,
+          taille: 25,
           fils: []
         }
       ]
     },
     {
-      nom :"time 2",
-      indiceDepart : 1,
-      taille: 2,
-      evenements:[{
-        nom : "eve 1-1-1-1",
-        indiceDepart : 1,
-        taille : 2,
-      },{
-        nom : "eve 1-1-1-2",
-        indiceDepart : 1,
-        taille : 1,
-      }],
+      id: 123,
+      nom: "time 3",
+      indiceDepart: 1,
+      taille: 25,
       fils: []
     }
   ]
-}
-
-const univers: IUnivers = {
-  nom :"univers 1",
-  taille: 15651,
-  spaces: [space, space]
-}
+};
 
 function App() {
   return (
@@ -92,7 +122,11 @@ function App() {
         <Router>
           <div className="App__routes">
             <Switch>
-              <Route exact path={"/"} render={() => <Univers univers={univers}/>} />
+              <Route
+                exact
+                path={"/"}
+                render={() => <Univers univers={univers} />}
+              />
 
               <Route render={() => <Redirect push to={"/"} />} />
             </Switch>
