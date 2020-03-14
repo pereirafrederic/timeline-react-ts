@@ -48,52 +48,36 @@ export default class Spaces extends React.Component<IProps, IState> {
     );
   }
   private getSousLevel(time: ITime, level: number) {
-    console.log("getSousLevel", level);
-    let taille: Array<Object> = [];
-    if (!!time.fils) {
-      console.log("push fils ", taille.length, "vide");
-      taille.push({});
-    }
+    let retour = level;
     time?.fils?.forEach(fils => {
-      const el = this.getSousLevel(fils, level + 1);
-      if (el && taille.length < level + el.length) {
-        console.log("push fils", taille.length, el.length);
-        el.map(e => taille.push({}));
-      }
+      const retour2 = this.getSousLevel(fils, level + 1);
+      if (retour2 && retour2 > retour) retour = retour2;
     });
-    if (!taille.length) return null;
-    console.log("return fils " + taille.length);
-    return taille;
+    return retour;
   }
 
   private getLevel(time: ITime) {
-    const level = 1;
-    let taille = [{}];
-    if (!!time.fils) {
-      console.log("push ", taille.length, "vide");
-      taille.push({});
-    }
+    console.log("getLevel ");
+    let level = 1;
 
     time.fils.forEach(fils => {
-      const el = this.getSousLevel(fils, level + 1);
-      if (el && taille.length < level + el.length) {
-        console.log("push ", taille.length, el);
-        el.map(e => taille.push({}));
-      }
+      const retour = this.getSousLevel(fils, level + 1);
+      if (retour && retour > level) level = retour;
     });
-    console.log("return " + taille.length);
-    return taille;
+    return level;
   }
 
   public renderNotEmpty() {
     const { univers } = this.props;
 
     let timesSet: Set<ITime> = new Set();
-    const ColTime: Array<Object> = [];
+    let ColTime: Array<Object> = [];
     univers?.times.forEach(time => {
       const re = this.getLevel(time);
-      if (ColTime.length < re.length) {
-        re.map(res => ColTime.push(res));
+      if (ColTime.length < re) {
+        for (let index = 1; index < re; index++) {
+          ColTime.push({});
+        }
       }
     });
 
@@ -108,14 +92,11 @@ export default class Spaces extends React.Component<IProps, IState> {
           <table>
             <thead>
               <tr>
-                {univers?.times?.map((time: ITime) => {
-                  console.log("ColTime", ColTime);
-                  return ColTime.map(ColTime => (
-                    <th scope="col">
-                      <Space />
-                    </th>
-                  ));
-                })}
+                {ColTime.map(ColTime => (
+                  <th scope="col">
+                    <Space />
+                  </th>
+                ))}
                 {univers?.spaces?.map((space: ISpace) => (
                   <th scope="col">
                     <Space space={space} />
@@ -127,39 +108,6 @@ export default class Spaces extends React.Component<IProps, IState> {
               {univers?.times?.map((time: ITime) => {
                 return this.renderTime(timesSet, time);
               })}
-              {univers?.times?.map((time: ITime) => (
-                <tr>
-                  <React.Fragment>
-                    {univers?.spaces?.map((space: ISpace) => {
-                      const evenementTime = space.evenements.filter(
-                        ev => ev.idTime === time.id
-                      );
-
-                      return evenementTime?.map((ev: IEvenement) => (
-                        <td>
-                          <Evenement evenement={ev} />
-                        </td>
-                      ));
-                    })}
-
-                    {time?.fils?.map((time: ITime) => (
-                      <React.Fragment>
-                        {univers?.spaces?.map((space: ISpace) => {
-                          const evenementTime = space.evenements.filter(
-                            ev => ev.idTime === time.id
-                          );
-
-                          return evenementTime?.map((ev: IEvenement) => (
-                            <td>
-                              <Evenement evenement={ev} />
-                            </td>
-                          ));
-                        })}
-                      </React.Fragment>
-                    ))}
-                  </React.Fragment>
-                </tr>
-              ))}
             </tbody>
           </table>
         </div>
@@ -172,21 +120,40 @@ export default class Spaces extends React.Component<IProps, IState> {
     );
   }
 
+  private renderSpaceTime(time: ITime): JSX.Element {
+    const { univers } = this.props;
+    return (
+      <React.Fragment>
+        {univers?.spaces?.map((space: ISpace) => {
+          const evenementTime = space.evenements.filter(
+            ev => ev.idTime === time.id
+          );
+          return evenementTime?.map((ev: IEvenement) => (
+            <td>
+              <Evenement evenement={ev} />
+            </td>
+          ));
+        })}
+      </React.Fragment>
+    );
+  }
+
   private renderTime(timesSet: Set<ITime>, time: ITime) {
     timesSet.add(time);
+
     return (
       <React.Fragment>
         <tr>
           <Time time={time} />
+          {this.renderSpaceTime(time)}
         </tr>
         <React.Fragment>
           {time.fils && !!time.fils.length && (
-            <div className="Time__content__fils">
+            <React.Fragment>
               {time.fils.map(time => {
-                timesSet.add(time);
                 return this.renderTime(timesSet, time);
               })}
-            </div>
+            </React.Fragment>
           )}
         </React.Fragment>
       </React.Fragment>
