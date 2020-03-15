@@ -152,7 +152,7 @@ function App() {
               />
               <Route
                 exact
-                path={"/univers-sans espace"}
+                path={"/univers-sans-espace"}
                 render={() => <Univers univers={universSansEspace} />}
               />
 

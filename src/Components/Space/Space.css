@@ -1,12 +1,14 @@
 .Space {
   display: flex;
   flex-direction: column;
+
   flex-grow: 1;
 }
 
 .Space__header {
   display: flex;
   flex-direction: column;
+  text-align: center;
   padding: 5px;
   border: 5px solid White;
 }

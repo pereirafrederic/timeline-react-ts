@@ -32,7 +32,9 @@ export default class Spaces extends React.Component<IProps, IState> {
     return (
       <div className="Space___content__empty">
         <h2>Votre Univers est vide</h2>
-        <div className="center pointeur" onClick={e => this.addUnivers}>
+
+        <div className="center pointeur" onClick={e => this.addUnivers()}>
+          <h3>ajouter un univers</h3>
           <Icon
             path={mdiEarth}
             title="Ajouter un univers"
@@ -74,7 +76,7 @@ export default class Spaces extends React.Component<IProps, IState> {
     const { univers } = this.props;
 
     let timesSet: Set<ITime> = new Set();
-    let ColTime: Array<Object> = [];
+    let ColTime: Array<Object> = [{}]; //pour la dernière colonne qui sera addTime
     univers?.times?.forEach(time => {
       const re = this.getLevel(time);
       console.log("test", ColTime.length < re, ColTime.length, re);
@@ -112,14 +114,19 @@ export default class Spaces extends React.Component<IProps, IState> {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <Time isEnabledToCreate={true} />
-              </tr>
+              {!!univers?.times?.length && (
+                <tr>
+                  <Time isEnabledToCreate={true} />
+                </tr>
+              )}
               {univers?.times?.map((time: ITime) => {
-                return this.renderTime(timesSet, time, 0, ColTime.length);
+                return this.renderTime(timesSet, time, 0, ColTime.length - 1);
               })}
               <tr>
-                <Time isEnabledToCreate={true} />
+                <Time
+                  isEnabledToCreate={true}
+                  withMessage={!univers?.times?.length}
+                />
               </tr>
             </tbody>
           </table>
@@ -205,6 +212,9 @@ export default class Spaces extends React.Component<IProps, IState> {
                 <Time isEnabledToCreate={false} />
               </td>
             ))}
+          <td>
+            <Time isEnabledToCreate={niveau === niveaumax} />
+          </td>
           {this.renderSpaceTime(time)}
         </tr>
 

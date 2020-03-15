@@ -13,6 +13,10 @@ interface IProps {
 interface IState {}
 
 export default class Evenement extends React.Component<IProps, IState> {
+  public addEvenement() {
+    console.log("addEvenement");
+  }
+
   public render() {
     const { evenement, isEnabledToCreate } = this.props;
     if (!evenement)
@@ -21,6 +25,7 @@ export default class Evenement extends React.Component<IProps, IState> {
           className={
             "Evenement  " + isEnabledToCreate ? "withoutBorder" : "withBorder"
           }
+          onClick={e => this.addEvenement()}
         >
           <div className="Evenement__header">
             {isEnabledToCreate && (

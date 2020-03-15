@@ -10,24 +10,28 @@ import Icon from "@mdi/react";
 interface IProps {
   time?: ITime;
   isEnabledToCreate?: Boolean;
+  withMessage?: boolean;
 }
 
 interface IState {}
 
 export default class Time extends React.Component<IProps, IState> {
+  public addTime() {
+    console.log("addTime");
+  }
   public render() {
-    const { time, isEnabledToCreate } = this.props;
+    const { time, isEnabledToCreate, withMessage } = this.props;
 
     if (!time)
       return (
         <div
-          className={
-            "Time pointeur " + isEnabledToCreate
-              ? "withoutBorder"
-              : "withBorder"
-          }
+          className={`Time ${
+            isEnabledToCreate ? "pointeur withoutBorder" : ""
+          }`}
+          onClick={e => this.addTime()}
         >
           <div className="Time__header">
+            {withMessage && <h2>Ajouter une Temporalité</h2>}
             {isEnabledToCreate && (
               <React.Fragment>
                 <div className="center fpe-row">
@@ -56,7 +60,7 @@ export default class Time extends React.Component<IProps, IState> {
       );
 
     return (
-      <div className={"Time pointeur withBorder"}>
+      <div className={"Time withBorder"}>
         <div className="Time__header">
           <h2>{time.nom}</h2>
           <h3>{`${time.indiceDepart} - ${time.taille}`} </h3>
