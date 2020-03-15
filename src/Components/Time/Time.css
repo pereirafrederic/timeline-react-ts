@@ -5,10 +5,9 @@
   padding: 5px;
   background-color: white;
   align-items: center;
-  border: 5px solid black;
 }
 
-.Time__header{
+.Time__header {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -16,7 +15,7 @@
   max-width: 5%;
 }
 
-.Time__content{
+.Time__content {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -26,18 +25,20 @@
 .Time__content__evenements {
   display: flex;
   flex-direction: row;
-  align-items : stretch;
+  align-items: stretch;
   border: 5px solid white;
   padding: 5px;
   flex-grow: 1;
 }
 
- .Time__content__fils {
+.Time__content__fils {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  align-items : stretch;
+  align-items: stretch;
   border: 5px solid white;
   padding: 5px;
-  
+}
+.withBorder {
+  border: 5px solid black;
 }

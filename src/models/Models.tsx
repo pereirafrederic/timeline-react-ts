@@ -1,15 +1,15 @@
 export interface IUnivers extends INominatif {
-  times: Array<ITime>;
-  spaces: Array<ISpace>;
+  times?: Array<ITime>;
+  spaces?: Array<ISpace>;
 }
 
 export interface ISpace extends INominatif {
-  evenements: Array<IEvenement>;
+  evenements?: Array<IEvenement>;
 }
 
 export interface ITime extends INominatif {
   indiceDepart: Number;
-  fils: Array<ITime>;
+  fils?: Array<ITime>;
 }
 
 export interface IEvenement extends INominatif {

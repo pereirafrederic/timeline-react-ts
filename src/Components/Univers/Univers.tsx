@@ -32,7 +32,7 @@ export default class Spaces extends React.Component<IProps, IState> {
     return (
       <div className="Space___content__empty">
         <h2>Votre Univers est vide</h2>
-        <div className="center">
+        <div className="center pointeur" onClick={e => this.addUnivers}>
           <Icon
             path={mdiEarth}
             title="Ajouter un univers"
@@ -50,20 +50,23 @@ export default class Spaces extends React.Component<IProps, IState> {
   private getSousLevel(time: ITime, level: number) {
     let retour = level;
     time?.fils?.forEach(fils => {
-      const retour2 = this.getSousLevel(fils, level + 1);
+      level = level + 1;
+      const retour2 = this.getSousLevel(fils, level);
       if (retour2 && retour2 > retour) retour = retour2;
     });
     return retour;
   }
 
   private getLevel(time: ITime) {
-    console.log("getLevel ");
-    let level = 1;
+    console.log("getLevel sur", time.nom);
+    let level = 0;
 
-    time.fils.forEach(fils => {
-      const retour = this.getSousLevel(fils, level + 1);
+    time?.fils?.forEach(fils => {
+      level = level + 1;
+      const retour = this.getSousLevel(fils, level);
       if (retour && retour > level) level = retour;
     });
+    console.log("getLevel return ", level);
     return level;
   }
 
@@ -72,10 +75,11 @@ export default class Spaces extends React.Component<IProps, IState> {
 
     let timesSet: Set<ITime> = new Set();
     let ColTime: Array<Object> = [];
-    univers?.times.forEach(time => {
+    univers?.times?.forEach(time => {
       const re = this.getLevel(time);
-      if (ColTime.length < re) {
-        for (let index = 1; index < re; index++) {
+      console.log("test", ColTime.length < re, ColTime.length, re);
+      if (ColTime.length <= re) {
+        for (let index = 1; index <= re; index++) {
           ColTime.push({});
         }
       }
@@ -92,9 +96,9 @@ export default class Spaces extends React.Component<IProps, IState> {
           <table>
             <thead>
               <tr>
-                {ColTime.map(ColTime => (
+                {ColTime.map(colTime => (
                   <th scope="col">
-                    <Space />
+                    <Space isEnabledToCreate={false} />
                   </th>
                 ))}
                 {univers?.spaces?.map((space: ISpace) => (
@@ -102,12 +106,21 @@ export default class Spaces extends React.Component<IProps, IState> {
                     <Space space={space} />
                   </th>
                 ))}
+                <th scope="col">
+                  <Space isEnabledToCreate={true} />
+                </th>
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <Time isEnabledToCreate={true} />
+              </tr>
               {univers?.times?.map((time: ITime) => {
-                return this.renderTime(timesSet, time);
+                return this.renderTime(timesSet, time, 0, ColTime.length);
               })}
+              <tr>
+                <Time isEnabledToCreate={true} />
+              </tr>
             </tbody>
           </table>
         </div>
@@ -125,12 +138,23 @@ export default class Spaces extends React.Component<IProps, IState> {
     return (
       <React.Fragment>
         {univers?.spaces?.map((space: ISpace) => {
-          const evenementTime = space.evenements.filter(
+          const evenementTime = space?.evenements?.filter(
             ev => ev.idTime === time.id
           );
+
+          if (!evenementTime?.length) {
+            console.log("space vide");
+            return (
+              <td>
+                <Evenement isEnabledToCreate={true} />
+              </td>
+            );
+          }
           return evenementTime?.map((ev: IEvenement) => (
             <td>
+              <Evenement isEnabledToCreate={true} />
               <Evenement evenement={ev} />
+              <Evenement isEnabledToCreate={true} />
             </td>
           ));
         })}
@@ -138,24 +162,59 @@ export default class Spaces extends React.Component<IProps, IState> {
     );
   }
 
-  private renderTime(timesSet: Set<ITime>, time: ITime) {
+  private renderTime(
+    timesSet: Set<ITime>,
+    time: ITime,
+    niveau: number,
+    niveaumax: number
+  ) {
+    niveau = niveau + 1;
+    console.log("time ", time.nom, "level", niveau);
     timesSet.add(time);
+    let ColTimeBefore: Array<Object> = [];
+    let ColTimeAfter: Array<Object> = [];
+    for (let index = 1; index < niveaumax; index++) {
+      if (index < niveau) {
+        ColTimeBefore.push({});
+      } else {
+        ColTimeAfter.push({});
+      }
+    }
 
     return (
       <React.Fragment>
         <tr>
-          <Time time={time} />
+          {ColTimeBefore &&
+            ColTimeBefore.map(colTime => (
+              <td>
+                <Time isEnabledToCreate={false} />
+              </td>
+            ))}
+          <td>
+            <tr>
+              <Time isEnabledToCreate={true} />
+            </tr>
+            <Time time={time} />
+            <tr>
+              <Time isEnabledToCreate={true} />
+            </tr>
+          </td>
+          {ColTimeAfter &&
+            ColTimeAfter.map(colTime => (
+              <td>
+                <Time isEnabledToCreate={false} />
+              </td>
+            ))}
           {this.renderSpaceTime(time)}
         </tr>
-        <React.Fragment>
-          {time.fils && !!time.fils.length && (
-            <React.Fragment>
-              {time.fils.map(time => {
-                return this.renderTime(timesSet, time);
-              })}
-            </React.Fragment>
-          )}
-        </React.Fragment>
+
+        {time.fils && !!time.fils.length && (
+          <React.Fragment>
+            {time.fils.map(time => {
+              return this.renderTime(timesSet, time, niveau, niveaumax);
+            })}
+          </React.Fragment>
+        )}
       </React.Fragment>
     );
   }
