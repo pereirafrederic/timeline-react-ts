@@ -89,18 +89,20 @@ export default class Spaces extends React.Component<IProps, IState> {
 
     return (
       <div className="Univers__content__spaces">
-        <div className="side__top">
-          <FastBackwardOutlined rotate={90} className="pointer" />
-          <StepBackwardOutlined rotate={90} className="pointer" />
-          <CaretLeftOutlined rotate={90} />
-        </div>
         <div className="side__center">
           <table>
             <thead>
               <tr>
-                {ColTime.map(colTime => (
+                {ColTime.map((colTime, index) => (
                   <th scope="col">
-                    <Space isEnabledToCreate={false} />
+                    {index === 0 && (
+                      <div>
+                        <FastBackwardOutlined rotate={90} className="pointer" />
+                        <StepBackwardOutlined rotate={90} className="pointer" />
+                        <CaretLeftOutlined rotate={90} />
+                      </div>
+                    )}
+                    {index > 0 && <Space isEnabledToCreate={false} />}
                   </th>
                 ))}
                 {univers?.spaces?.map((space: ISpace) => (
@@ -128,13 +130,15 @@ export default class Spaces extends React.Component<IProps, IState> {
                   withMessage={!univers?.times?.length}
                 />
               </tr>
+              <tr>
+                <div>
+                  <CaretRightOutlined rotate={90} className="pointer" />
+                  <StepForwardOutlined rotate={90} className="pointer" />
+                  <FastForwardOutlined rotate={90} className="pointer" />
+                </div>
+              </tr>
             </tbody>
           </table>
-        </div>
-        <div className="side__bottom">
-          <CaretRightOutlined rotate={90} className="pointer" />
-          <StepForwardOutlined rotate={90} className="pointer" />
-          <FastForwardOutlined rotate={90} className="pointer" />
         </div>
       </div>
     );
