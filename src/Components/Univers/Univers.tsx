@@ -1,17 +1,10 @@
 import * as React from "react";
-import { mdiEarth } from "@mdi/js";
+import { mdiEarth, mdiSkipPrevious, mdiMenuDown } from "@mdi/js";
 import Icon from "@mdi/react";
+import { mdiSkipBackward } from "@mdi/js";
 import "./Univers.css";
 import { IUnivers, ISpace, ITime, IEvenement } from "../../models/Models";
 
-import {
-  FastBackwardOutlined,
-  StepBackwardOutlined,
-  CaretLeftOutlined,
-  CaretRightOutlined,
-  StepForwardOutlined,
-  FastForwardOutlined
-} from "@ant-design/icons";
 import Space from "../Space/Space";
 import Time from "../Time/Time";
 import Evenement from "../Evenement/Evenement";
@@ -97,9 +90,30 @@ export default class Spaces extends React.Component<IProps, IState> {
                   <th scope="col">
                     {index === 0 && (
                       <div>
-                        <FastBackwardOutlined rotate={90} className="pointer" />
-                        <StepBackwardOutlined rotate={90} className="pointer" />
-                        <CaretLeftOutlined rotate={90} />
+                        <Icon
+                          path={mdiSkipBackward}
+                          size={1}
+                          horizontal
+                          vertical
+                          rotate={270}
+                          color="red"
+                        />
+                        <Icon
+                          path={mdiSkipPrevious}
+                          size={2}
+                          horizontal
+                          vertical
+                          rotate={270}
+                          color="red"
+                        />
+                        <Icon
+                          path={mdiMenuDown}
+                          size={2}
+                          horizontal
+                          vertical
+                          rotate={0}
+                          color="red"
+                        />
                       </div>
                     )}
                     {index > 0 && <Space isEnabledToCreate={false} />}
@@ -132,9 +146,30 @@ export default class Spaces extends React.Component<IProps, IState> {
               </tr>
               <tr>
                 <div>
-                  <CaretRightOutlined rotate={90} className="pointer" />
-                  <StepForwardOutlined rotate={90} className="pointer" />
-                  <FastForwardOutlined rotate={90} className="pointer" />
+                  <Icon
+                    path={mdiSkipBackward}
+                    size={2}
+                    horizontal
+                    vertical
+                    rotate={90}
+                    color="red"
+                  />
+                  <Icon
+                    path={mdiSkipPrevious}
+                    size={2}
+                    horizontal
+                    vertical
+                    rotate={90}
+                    color="red"
+                  />
+                  <Icon
+                    path={mdiMenuDown}
+                    size={2}
+                    horizontal
+                    vertical
+                    rotate={180}
+                    color="red"
+                  />
                 </div>
               </tr>
             </tbody>
@@ -180,7 +215,17 @@ export default class Spaces extends React.Component<IProps, IState> {
     niveaumax: number
   ) {
     niveau = niveau + 1;
-    console.log("time ", time.nom, "level", niveau);
+    const level = this.getLevel(time);
+    console.log(
+      "time ",
+      time.nom,
+      "niveau",
+      niveau,
+      "niveauMax",
+      niveaumax,
+      "level",
+      level
+    );
     timesSet.add(time);
     let ColTimeBefore: Array<Object> = [];
     let ColTimeAfter: Array<Object> = [];
@@ -211,9 +256,9 @@ export default class Spaces extends React.Component<IProps, IState> {
             </tr>
           </td>
           {ColTimeAfter &&
-            ColTimeAfter.map(colTime => (
+            ColTimeAfter.map((colTime, index) => (
               <td>
-                <Time isEnabledToCreate={false} />
+                <Time isEnabledToCreate={0 === level && index === 0} />
               </td>
             ))}
           <td>
