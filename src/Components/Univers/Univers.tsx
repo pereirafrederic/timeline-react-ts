@@ -10,15 +10,32 @@ import Time from "../Time/Time";
 import Evenement from "../Evenement/Evenement";
 //
 
+var _ = require("lodash");
+
 interface IProps {
   univers?: IUnivers;
+  addUnivers: Function;
+  addSpace: Function;
+  addTime: Function;
 }
 
 interface IState {}
 
 export default class Spaces extends React.Component<IProps, IState> {
   public addUnivers() {
+    const { addUnivers } = this.props;
+
     console.log("addUnivers");
+
+    const univers: IUnivers = {
+      nom: "univers " + Math.random(),
+      id: Math.random(),
+      taille: Math.random(),
+      spaces: [],
+      times: []
+    };
+
+    addUnivers(univers);
   }
 
   public renderEmpty() {
@@ -66,19 +83,19 @@ export default class Spaces extends React.Component<IProps, IState> {
   }
 
   public renderNotEmpty() {
-    const { univers } = this.props;
+    const { univers, addTime, addSpace } = this.props;
 
     let timesSet: Set<ITime> = new Set();
     let ColTime: Array<Object> = [{}]; //pour la dernière colonne qui sera addTime
     univers?.times?.forEach(time => {
       const re = this.getLevel(time);
       console.log("test", ColTime.length < re, ColTime.length, re);
-      if (ColTime.length <= re) {
-        for (let index = 1; index <= re; index++) {
-          ColTime.push({});
-        }
+      for (let index = 0; index <= re; index++) {
+        ColTime.push({});
       }
     });
+
+    const arbo: Array<number> = [];
 
     return (
       <div className="Univers__content__spaces">
@@ -116,30 +133,34 @@ export default class Spaces extends React.Component<IProps, IState> {
                         />
                       </div>
                     )}
-                    {index > 0 && <Space isEnabledToCreate={false} />}
+                    {index > 0 && (
+                      <Space addSpace={addSpace} isEnabledToCreate={false} />
+                    )}
                   </th>
                 ))}
                 {univers?.spaces?.map((space: ISpace) => (
                   <th scope="col">
-                    <Space space={space} />
+                    <Space addSpace={addSpace} space={space} />
                   </th>
                 ))}
                 <th scope="col">
-                  <Space isEnabledToCreate={true} />
+                  <Space addSpace={addSpace} isEnabledToCreate={true} />
                 </th>
               </tr>
             </thead>
             <tbody>
               {!!univers?.times?.length && (
                 <tr>
-                  <Time isEnabledToCreate={true} />
+                  <Time arbo={[]} addTime={addTime} isEnabledToCreate={true} />
                 </tr>
               )}
               {univers?.times?.map((time: ITime) => {
-                return this.renderTime(timesSet, time, 0, ColTime.length - 1);
+                return this.renderTime(timesSet, time, [], ColTime.length - 1);
               })}
               <tr>
                 <Time
+                  arbo={arbo}
+                  addTime={addTime}
                   isEnabledToCreate={true}
                   withMessage={!univers?.times?.length}
                 />
@@ -211,10 +232,12 @@ export default class Spaces extends React.Component<IProps, IState> {
   private renderTime(
     timesSet: Set<ITime>,
     time: ITime,
-    niveau: number,
+    arbo: Array<number>,
     niveaumax: number
   ) {
-    niveau = niveau + 1;
+    const { addTime } = this.props;
+
+    const niveau = arbo.length + 1;
     const level = this.getLevel(time);
     console.log(
       "time ",
@@ -236,33 +259,47 @@ export default class Spaces extends React.Component<IProps, IState> {
         ColTimeAfter.push({});
       }
     }
-
+    const arboFils = Object.assign([], arbo);
+    const trouve = _.findIndex(arboFils, ["id", time.id]);
+    if (trouve === -1) arboFils.push(time.id);
+    debugger;
+    console.log("arbre", arbo, arboFils);
     return (
       <React.Fragment>
         <tr>
           {ColTimeBefore &&
             ColTimeBefore.map(colTime => (
               <td>
-                <Time isEnabledToCreate={false} />
+                <Time arbo={arbo} addTime={addTime} isEnabledToCreate={false} />
               </td>
             ))}
           <td>
             <tr>
-              <Time isEnabledToCreate={true} />
+              <Time arbo={arbo} addTime={addTime} isEnabledToCreate={true} />
             </tr>
-            <Time time={time} />
+            <Time arbo={arbo} addTime={addTime} time={time} />
             <tr>
-              <Time isEnabledToCreate={true} />
+              <Time arbo={arbo} addTime={addTime} isEnabledToCreate={true} />
             </tr>
           </td>
           {ColTimeAfter &&
             ColTimeAfter.map((colTime, index) => (
               <td>
-                <Time isEnabledToCreate={0 === level && index === 0} />
+                <Time
+                  arbo={arboFils}
+                  addTime={addTime}
+                  isEnabledToCreate={
+                    0 === level && index === 0 && niveau !== niveaumax
+                  }
+                />
               </td>
             ))}
           <td>
-            <Time isEnabledToCreate={niveau === niveaumax} />
+            <Time
+              arbo={arboFils}
+              addTime={addTime}
+              isEnabledToCreate={niveau === niveaumax && level === 0}
+            />
           </td>
           {this.renderSpaceTime(time)}
         </tr>
@@ -270,7 +307,7 @@ export default class Spaces extends React.Component<IProps, IState> {
         {time.fils && !!time.fils.length && (
           <React.Fragment>
             {time.fils.map(time => {
-              return this.renderTime(timesSet, time, niveau, niveaumax);
+              return this.renderTime(timesSet, time, arboFils, niveaumax);
             })}
           </React.Fragment>
         )}
