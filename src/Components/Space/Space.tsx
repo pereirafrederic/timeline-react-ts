@@ -11,13 +11,26 @@ import { ISpace } from "../../models/Models";
 interface IProps {
   space?: ISpace;
   isEnabledToCreate?: Boolean;
+  addSpace: Function;
 }
 
 interface IState {}
 
 export default class Space extends React.Component<IProps, IState> {
   public addSpace() {
+    const { addSpace } = this.props;
     console.log("addSpace");
+
+    const nom = "space " + Math.random();
+
+    const el: ISpace = {
+      nom: nom,
+      id: Math.random(),
+      taille: Math.random(),
+      evenements: []
+    };
+
+    addSpace(el);
   }
   public render() {
     const { space, isEnabledToCreate } = this.props;

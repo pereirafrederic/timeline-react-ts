@@ -11,13 +11,26 @@ interface IProps {
   time?: ITime;
   isEnabledToCreate?: Boolean;
   withMessage?: boolean;
+  addTime: Function;
+  arbo: Array<number>;
 }
 
 interface IState {}
 
 export default class Time extends React.Component<IProps, IState> {
   public addTime() {
+    const { addTime, arbo } = this.props;
     console.log("addTime");
+
+    const el: ITime = {
+      nom: "time " + Math.random(),
+      id: Math.random(),
+      taille: Math.random(),
+      indiceDepart: Math.random(),
+      fils: []
+    };
+
+    addTime(el, arbo);
   }
   public render() {
     const { time, isEnabledToCreate, withMessage } = this.props;
