@@ -12,3 +12,7 @@ code {
     monospace;
 }
 @import "~antd/dist/antd.css";
+@import "./table.css";
+.fpe-row {
+  display: inline-block;
+}

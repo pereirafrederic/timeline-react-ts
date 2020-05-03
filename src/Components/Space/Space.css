@@ -1,12 +1,14 @@
 .Space {
   display: flex;
   flex-direction: column;
+
   flex-grow: 1;
 }
 
-.Space__header{
+.Space__header {
   display: flex;
   flex-direction: column;
+  text-align: center;
   padding: 5px;
   border: 5px solid White;
 }
@@ -20,5 +22,4 @@
 }
 .Space__content__times {
   border: 5px solid white;
-  
 }

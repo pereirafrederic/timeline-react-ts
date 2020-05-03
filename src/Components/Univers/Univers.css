@@ -9,7 +9,7 @@
   border: 5px solid black;
 }
 
-.Univers__header{
+.Univers__header {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -17,7 +17,7 @@
   max-width: 5%;
 }
 
-.Univers__content{
+.Univers__content {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -53,14 +53,21 @@
   background-color: white;
   min-height: 97vh;
   display: flex;
-  min-width: 1vw;
+  min-width: 100vw;
 }
 
 .pointeur {
   padding: 5px;
   cursor: pointer;
 }
-.Univers__content__spaces{
+.Univers__content__spaces {
   display: flex;
+  flex-direction: column;
+  min-width: 100vw;
+}
+
+.group__time {
+  border: 5px solid black;
+  min-width: 100%;
   flex-direction: column;
 }

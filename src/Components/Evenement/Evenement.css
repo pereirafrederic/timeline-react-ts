@@ -1,16 +1,19 @@
-.Evenement{
-    display: flex;
-    flex-direction: row;
-    padding: 5px;
-    flex-grow: 1;
-    align-items: center;
-    /*border: 5px solid black;*/
+.Evenement {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  flex-grow: 1;
+  align-items: center;
+  /*border: 5px solid black;*/
 }
 
 .Evenement__header {
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    flex-grow: 1;
-    border: 5px solid beige;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  flex-grow: 1;
+}
+
+.withBorder {
+  border: 5px solid beige;
 }

@@ -1,61 +1,70 @@
 import * as React from "react";
-import {
-  AppstoreAddOutlined,
-} from "@ant-design/icons";
+
+import { mdiMapPlus } from "@mdi/js";
+import Icon from "@mdi/react";
 
 import "./Space.css";
 
 //
-import { ISpace, ITime } from "../../models/Models";
-import Time from "../Time/Time";
+import { ISpace } from "../../models/Models";
 
 interface IProps {
   space?: ISpace;
+  isEnabledToCreate?: Boolean;
+  addSpace: Function;
 }
 
 interface IState {}
 
 export default class Space extends React.Component<IProps, IState> {
-  public addTime() {
-    console.log("addTime");
+  public addSpace() {
+    const { addSpace } = this.props;
+    console.log("addSpace");
+
+    const nom = "space " + Math.random();
+
+    const el: ISpace = {
+      nom: nom,
+      id: Math.random(),
+      taille: Math.random(),
+      evenements: []
+    };
+
+    addSpace(el);
   }
-
-  public renderEmpty() {
-    return (
-      <div className="Space___content__empty">
-        <h2>Votre espace est vide</h2>
-        <div className="center">
-          <AppstoreAddOutlined onClick={(e:any) => this.addTime()} />
-        </div>
-      </div>
-    );
-  }
-
-  public renderNotEmpty() {
-    const { space } = this.props;
-    return (
-      <div className="Space__content__times">
-
-        <div className="side__center">
-          {space?.times.map((time: ITime) => (
-            <Time time={time} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   public render() {
-    const { space } = this.props;
+    const { space, isEnabledToCreate } = this.props;
+
+    if (!space)
+      return (
+        <div className="Space pointeur" onClick={e => this.addSpace()}>
+          <div className="Space__header">
+            {isEnabledToCreate && (
+              <React.Fragment>
+                <h2>Ajouter un espace</h2>
+                <div className="center">
+                  <Icon
+                    path={mdiMapPlus}
+                    title="Ajouter un Espace"
+                    size={1}
+                    horizontal
+                    vertical
+                    rotate={180}
+                    color="blue"
+                  />
+                </div>
+              </React.Fragment>
+            )}
+          </div>
+        </div>
+      );
     return (
       <div className="Space">
         <div className="Space__header">
-        <h2>{space?.nom}</h2>
-        <h3>{space?.taille}</h3>
+          <h2>{space?.nom}</h2>
+          <h3>{space?.taille}</h3>
         </div>
-        {!space?.times && this.renderEmpty()}
-        {space?.times && this.renderNotEmpty()}</div>
-      
+      </div>
     );
   }
 }
