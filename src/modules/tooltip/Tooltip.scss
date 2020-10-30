@@ -1,0 +1,176 @@
+@import '../../modules/visuel/mixin/sizes.scss';
+@import '../../modules/visuel/mixin/color.scss';
+@import '../../modules/visuel/mixin/responsive.scss';
+
+.Tooltip {
+  @media #{$responsiveTabletAndDesktop} {
+    &:hover {
+      position: relative;
+      z-index: 1; // Créé un context d'empilement
+    }
+  }
+
+  @media #{$responsiveMobile} {
+    .Tooltip__container {
+      z-index: 10000; // TODO : A centraliser
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+
+      .Tooltip__visible {
+        background-color: #ffffff;
+        padding: $sizeSpace4;
+        color: $primary-color;
+        box-shadow: 0px 0px 16px 2px rgba(black, 0.3);
+        position: relative;
+        .Tooltip__closer {
+          outline: none;
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          top: 0px;
+          right: 0px;
+          background-color: transparent;
+          border: none;
+          transform: translate3d(00%, -50%, 0px);
+          align-items: center;
+          justify-content: center;
+          .Tooltip__closer-visible {
+            background-color: white;
+            width: 16px + $sizeSpace2 * 2;
+            height: 16px + $sizeSpace2 * 2;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            box-shadow: 0px 2px 16px 2px rgba(black, 0.3);
+            .Tooltip__closer-icon {
+              width: 16px;
+              height: 16px;
+              fill: $primary-color-light;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$responsiveMinTablet} {
+    .Tooltip__container {
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      overflow: visible;
+      display: block;
+      &.TOP {
+        top: 0%;
+        left: 50%;
+      }
+      &.TOPRIGHT {
+        top: 0%;
+        right: 0%;
+      }
+      &.RIGHT {
+        top: 50%;
+        right: 0%;
+      }
+      &.BOTTOMRIGHT {
+        bottom: 0%;
+        right: 0%;
+      }
+      &.BOTTOM {
+        bottom: 0%;
+        left: 50%;
+      }
+      &.BOTTOMLEFT {
+        bottom: 0%;
+        left: 0%;
+      }
+      &.LEFT {
+        top: 50%;
+        left: 0%;
+      }
+      &.TOPLEFT {
+        top: 0%;
+        left: 0%;
+      }
+
+      .Tooltip__inner-container {
+        width: 200px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        &.TOP {
+          transform: translate3d(-50%, 0px, 0px);
+          align-items: center;
+        }
+        &.TOPRIGHT {
+          transform: translate3d(-100%, 0px, 0px);
+          align-items: flex-end;
+        }
+        &.RIGHT {
+          transform: translate3d(-100%, -50%, 0px);
+          align-items: flex-end;
+        }
+        &.BOTTOMRIGHT {
+          transform: translate3d(-100%, -100%, 0px);
+          align-items: flex-end;
+        }
+        &.BOTTOM {
+          transform: translate3d(-50%, -100%, 0px);
+          align-items: center;
+        }
+        &.BOTTOMLEFT {
+          transform: translate3d(0px, -100%, 0px);
+          align-items: flex-start;
+        }
+        &.LEFT {
+          transform: translate3d(0px, -50%, 0px);
+          align-items: flex-start;
+        }
+        &.TOPLEFT {
+          transform: translate3d(0px, 0px, 0px);
+          align-items: flex-start;
+        }
+
+        .Tooltip__visible {
+          background-color: #ffffff;
+          padding: $sizeSpace3;
+          margin: $sizeSpace3;
+          color: $primary-color-dark;
+          border-radius: 4px;
+          box-shadow: 0px 2px 16px 2px rgba(black, 0.3);
+          position: relative;
+          box-sizing: border-box;
+          .Tooltip__closer {
+            outline: none;
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            top: 0px;
+            right: 0px;
+            background-color: transparent;
+            border: none;
+            transform: translate3d(50%, -50%, 0px);
+            align-items: center;
+            justify-content: center;
+            .Tooltip__closer-visible {
+              background-color: white;
+              width: 16px + $sizeSpace2 * 2;
+              height: 16px + $sizeSpace2 * 2;
+              align-items: center;
+              justify-content: center;
+              border-radius: 100%;
+              box-shadow: 0px 2px 16px 2px rgba(black, 0.3);
+              .Tooltip__closer-icon {
+                width: 16px;
+                height: 16px;
+                fill: $primary-color-light;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,100 @@
+// Pour réduire les conflits CSS, convention de nommage BEM
+// http://getbem.com/naming/
+@import '../../modules/visuel/mixin/sizes.scss';
+@import '../../modules/visuel/mixin/color.scss';
+@import '../../modules/visuel/mixin/reactive.scss';
+@import '../../modules/visuel/mixin/responsive.scss';
+
+.Popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: $primary-color-light;
+  align-items: center;
+  overflow: auto;
+
+  .Popup__container {
+    flex-shrink: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    width: $sizePopupMaxWidth + $sizeSpace4 * 2;
+    padding-left: $sizeSpace4;
+    padding-right: $sizeSpace4;
+
+    .Popup__header {
+      flex-direction: row;
+      margin-bottom: $sizeSpace4;
+
+      .Popup__titre {
+        color: #ffffff;
+        flex-grow: 1;
+      }
+
+      .Popup__close {
+        flex-shrink: 0;
+        margin-left: $sizeSpace4;
+        align-self: flex-start;
+        @include reactiveIconCircle(16px * 1.5, #ffffff, #ffffff);
+
+        .Popup__mdi-icon {
+          width: 16px;
+          height: 16px;
+          fill: #ffffff;
+        }
+      }
+    }
+
+    .Popup__content {
+      padding: $sizeSpace4;
+      background-color: #ffffff;
+
+      form,
+      form > :not(:last-child) {
+        margin-bottom: $sizeSpace4;
+      }
+
+      .Popup__info {
+        background-color: rgba($primary-color, 0.1);
+        margin-left: $sizeSpace4 * -1;
+        margin-right: $sizeSpace4 * -1;
+        margin-bottom: $sizeSpace4;
+        padding: $sizeSpace4;
+
+        .Popup__info__paragraph {
+          margin: 0px;
+          padding: 0px;
+          margin-bottom: $sizeSpace3;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+        }
+      }
+
+      .Popup__button {
+        align-items: center;
+      }
+
+      .BlockSpinner,
+      .BlockError {
+        padding-bottom: $sizeSpace6;
+      }
+    }
+  }
+
+  /* MOBILE */
+  @media #{$responsiveMobile} {
+    padding-top: $sizeSpace4;
+    padding-bottom: $sizeSpace4;
+  }
+
+  /* TABLET AND DESKTOP */
+  @media #{$responsiveMinTablet} {
+    .Popup__container {
+      padding-top: $sizePopupFromTop;
+      padding-bottom: $sizePopupFromTop;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@import './modules/visuel/mixin/sizes.scss';
+@import './modules/visuel/mixin/color.scss';
+body {
+  padding: 0;
+  margin: 0;
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+div,
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  min-width: 0px;
+  min-height: 0px;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+svg.mdi-icon {
+  width: $sizeIcon;
+  height: $sizeIcon;
+
+  &.form-field-icon {
+    width: $sizeIconWidthForm;
+    height: $sizeIconHeightForm;
+    margin: 0 $sizeIconMarginSideForm;
+  }
+
+  &.state-screen-icon {
+    width: $sizeIconStateScreen;
+    height: $sizeIconStateScreen;
+    margin-left: auto;
+    margin-right: auto;
+    fill: $primary-color;
+  }
+}

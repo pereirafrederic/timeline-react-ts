@@ -1,0 +1,30 @@
+@import '../../mixin/sizes.scss';
+.LayoutTablet {
+  padding-left: $sizeSpace4;
+  padding-right: $sizeSpace4;
+
+  .Block {
+    margin-bottom: $sizeSpace4;
+  }
+
+  .LayoutTabletColumns {
+    flex-direction: row;
+
+    &.own-height {
+      align-items: flex-start;
+    }
+
+    .LayoutTabletColumns__left {
+      width: calc(50% - #{$sizeSpace4 / 2});
+      margin-right: $sizeSpace4;
+    }
+
+    .LayoutTabletColumns__right {
+      width: calc(50% - #{$sizeSpace4 / 2});
+    }
+
+    .Block {
+      flex-grow: 1;
+    }
+  }
+}

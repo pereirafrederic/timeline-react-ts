@@ -1,0 +1,19 @@
+.TopBar {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin: 10px;
+
+  .TopBar__logo {
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+
+  .TopBar__raccourcis {
+    flex-grow: 3;
+  }
+
+  .TopBar__compte {
+    flex-grow: 1;
+  }
+}

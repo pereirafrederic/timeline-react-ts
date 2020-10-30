@@ -1,0 +1,63 @@
+@import '../mixin/sizes.scss';
+@import '../mixin/color.scss';
+@import '../mixin/responsive.scss';
+.Tile {
+  &.theme-INTERNAL {
+    background-image: linear-gradient(
+      90deg,
+      $primary-color-light,
+      $primary-color-dark
+    );
+  }
+
+  &.theme-EXTERNAL {
+    background-image: linear-gradient(
+      90deg,
+      $primary-color-dark,
+      $primary-color-light
+    );
+    border-radius: 10px;
+    .TileHeading {
+      text-align: center;
+    }
+  }
+
+  @media #{$responsiveMobile} {
+    padding-left: $sizeSpace4;
+    padding-right: $sizeSpace4;
+
+    .Tile__no-padding,
+    .Tile__no-padding-mobile {
+      margin-left: $sizeSpace4 * -1;
+      margin-right: $sizeSpace4 * -1;
+    }
+  }
+
+  @media #{$responsiveTablet} {
+    padding-left: $sizeSpace6;
+    padding-right: $sizeSpace6;
+
+    .Tile__no-padding,
+    .Tile__no-padding-tablet {
+      margin-left: $sizeSpace6 * -1;
+      margin-right: $sizeSpace6 * -1;
+    }
+  }
+
+  @media #{$responsiveDesktop} {
+    padding-left: $sizeSpace6;
+    padding-right: $sizeSpace6;
+
+    .Tile__no-padding,
+    .Tile__no-padding-desktop {
+      margin-left: $sizeSpace6 * -1;
+      margin-right: $sizeSpace6 * -1;
+    }
+  }
+
+  padding-bottom: $sizeSpace6;
+
+  .Tile__no-padding-bottom {
+    margin-bottom: $sizeSpace6 * -1;
+  }
+}

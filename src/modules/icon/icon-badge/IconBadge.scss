@@ -1,0 +1,35 @@
+@import '../../visuel/mixin/color.scss';
+@import '../../visuel/mixin/sizes.scss';
+
+.IconBadge {
+  position: relative;
+  max-width: $sizeBadgeSize;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: $sizeSpace2;
+  .icon {
+    border-radius: $sizeButtonRadius;
+    fill: $icon-color;
+    background-color: $primary-color-dark;
+  }
+  .pin {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    transform: translate3d(50%, -25%, 0px);
+
+    border: $sizeSpace1 solid $primary-color-light;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: $sizeBadgeSize * 0.5;
+    line-height: $sizeBadgeSize * 0.5;
+    font-weight: 900;
+    width: $sizeBadgeSize;
+    height: $sizeBadgeSize;
+    border-radius: $sizeBadgeSize;
+    box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.2);
+    background-color: $primary-color-dark;
+  }
+}

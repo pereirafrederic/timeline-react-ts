@@ -1,0 +1,109 @@
+@import '../visuel//mixin/color.scss';
+@import '../visuel//mixin/sizes.scss';
+
+.TileItem {
+  display: flex;
+  flex-direction: row;
+
+  background: none;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  background-color: $primary-color-light;
+  margin-bottom: $sizeSpace1;
+  text-align: left;
+  outline: none;
+
+  &.reactive {
+    cursor: pointer;
+  }
+  &.reactive:hover {
+    background-color: white;
+  }
+  .TileItem__data {
+    flex-direction: row;
+    .TileItem__label {
+      color: $primary-color-dark;
+    }
+
+    .TileItem__info {
+      padding: $sizeTileItemPadding;
+      color: $primary-color-light;
+    }
+  }
+  .TileItem__actions {
+    flex-shrink: 0;
+    flex-direction: row;
+    padding: $sizeTileItemPadding;
+    padding-left: $sizeTileItemPadding * 2;
+    padding-right: $sizeTileItemPadding * 2;
+    align-self: stretch;
+    align-items: center;
+    .icon {
+      width: $sizeTileItemIcon;
+      height: $sizeTileItemIcon;
+      fill: $primary-color-dark;
+    }
+    .text {
+      margin-left: $sizeSpace3;
+      color: $primary-color-dark;
+    }
+  }
+
+  .TileItem__in-progress {
+    padding: $sizeTileItemPadding;
+    padding-left: $sizeTileItemPadding * 2;
+    padding-right: $sizeTileItemPadding * 2;
+    align-self: stretch;
+    align-items: center;
+    color: $primary-color-light;
+    flex-direction: row;
+    align-items: center;
+    .text {
+      margin-right: $sizeSpace3;
+    }
+    .icon {
+      width: $sizeTileItemIcon;
+      height: $sizeTileItemIcon;
+      fill: $primary-color-light;
+      animation-name: spin;
+      animation-duration: 4000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+    }
+  }
+
+  &.ACCENT {
+    color: $accent-color;
+    .TileItem__value {
+      font-weight: bold;
+    }
+    .TileItem__actions .text {
+      color: $accent-color;
+    }
+    .TileItem__actions .icon {
+      fill: $accent-color;
+    }
+  }
+
+  &.ERROR {
+    color: red;
+    .TileItem__value {
+      font-weight: bold;
+    }
+    .TileItem__actions .text {
+      color: red;
+    }
+    .TileItem__actions .icon {
+      fill: red;
+    }
+  }
+}

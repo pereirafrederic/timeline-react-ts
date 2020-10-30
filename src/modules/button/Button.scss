@@ -1,0 +1,121 @@
+@import '../../modules/visuel/mixin/responsive.scss';
+@import '../../modules/visuel/mixin/sizes.scss';
+@import '../../modules/visuel/mixin/color.scss';
+.Button {
+  // Mutualisable
+
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+
+  &.enabled {
+    cursor: pointer;
+  }
+
+  // Spécifique
+  display: flex;
+
+  padding: $sizeSpace2;
+
+  .button-container {
+    flex-direction: row;
+    flex-direction: row;
+    border-radius: $sizeButtonRadius;
+    .icon-container {
+      border-radius: $sizeButtonRadius;
+      width: 16px + $sizeSpace3 * 2;
+      height: 16px + $sizeSpace3 * 2;
+      align-items: center;
+      justify-content: center;
+      .mdi-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &.disabled {
+    .button-container {
+      background-color: $primary-color-light;
+      .icon-container {
+        background-color: $primary-color-dark;
+        .mdi-icon {
+          fill: $icon-color;
+        }
+      }
+      .label {
+        color: $primary-color-dark;
+      }
+    }
+  }
+
+  &.dark.enabled {
+    .button-container {
+      background-color: $primary-color-light;
+      .icon-container {
+        background-color: $primary-color-dark;
+        .mdi-icon {
+          fill: $icon-color;
+        }
+      }
+      .label {
+        color: $primary-color-dark;
+      }
+    }
+    &:hover {
+      .button-container {
+        box-shadow: 0px 0px 0px $sizeSpace1 $primary-color-light;
+      }
+    }
+    &:focus {
+      .button-container {
+        box-shadow: 0px 0px $sizeSpace2 $sizeSpace2 $primary-color-light;
+      }
+    }
+    -webkit-tap-highlight-color: $primary-color-light;
+  }
+
+  &.light.enabled {
+    .button-container {
+      background-color: $primary-color-light;
+      .icon-container {
+        background-color: $primary-color-dark;
+        .mdi-icon {
+          fill: $icon-color;
+        }
+      }
+      .label {
+        color: $primary-color-dark;
+      }
+    }
+    &:hover {
+      .button-container {
+        box-shadow: 0px 0px 0px $sizeSpace1 $primary-color-light;
+      }
+    }
+    &:focus {
+      .button-container {
+        box-shadow: 0px 0px $sizeSpace2 $sizeSpace2 $primary-color-light;
+      }
+    }
+    -webkit-tap-highlight-color: $primary-color-light;
+  }
+
+  &.with-icon {
+    .label {
+      padding-top: $sizeSpace3;
+      padding-bottom: $sizeSpace3;
+      padding-right: $sizeSpace4;
+      padding-left: $sizeSpace3;
+    }
+  }
+
+  &.without-icon {
+    .label {
+      padding-top: $sizeSpace3;
+      padding-bottom: $sizeSpace3;
+      padding-right: $sizeSpace4;
+      padding-left: $sizeSpace4;
+    }
+  }
+}

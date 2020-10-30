@@ -1,0 +1,11 @@
+@mixin badge-reference {
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-color;
+  white-space: nowrap;
+  padding: 0px 14px;
+  border-radius: 20px;
+  font-weight: 900;
+  color: $primary-color;
+  text-transform: uppercase;
+}

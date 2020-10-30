@@ -3,19 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mdi/js": "3.4.93",
+    "@mdi/react": "^1.1.0",
     "@types/jest": "24.0.11",
     "@types/node": "11.13.4",
     "@types/react": "16.8.13",
     "@types/react-dom": "16.8.4",
+    "@types/react-redux": "^6.0.10",
+    "@types/react-responsive": "^3.0.3",
+    "@types/react-router-dom": "^4.3.1",
+    "formik": "^1.5.2",
+    "node-sass": "^4.11.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.8.6",
+    "react-app-polyfill": "^0.2.2",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.0.2",
+    "react-responsive": "^6.1.1",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "typescript": "3.4.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=8000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "clean": "tsc --build --clean",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -26,5 +41,13 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "core-js": "^3.0.0-beta.3",
+    "cross-env": "^5.2.0",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-typescript": "^0.13.0",
+    "react-perftool-extension": "^1.0.6",
+    "typescript-eslint-parser": "^20.1.1"
+  }
 }

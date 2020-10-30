@@ -1,0 +1,44 @@
+@import './modules/visuel/mixin/color.scss';
+.App {
+  display: flex;
+  flex-direction: column;
+
+  background-image: radial-gradient(
+    ellipse at center,
+    $primary-color-light,
+    $primary-color-light2
+  );
+  transition: left 150ms, opacity 150ms;
+  opacity: 1;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: $primary-color-text;
+  text-shadow: 1px 1px 2px $primary-color;
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px !important;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+
+  .App__TopBar {
+    margin: 1em;
+  }
+
+  .App__Body {
+    display: flex;
+    flex-direction: row;
+    .App__Body__Menu {
+      margin: 1em;
+    }
+    .App__Body__Content {
+      margin: 1em;
+    }
+  }
+
+  .App__footer {
+    margin: 1em;
+  }
+}

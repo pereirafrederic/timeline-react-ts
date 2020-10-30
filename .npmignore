@@ -1,0 +1,5 @@
+src/**/*.ts
+src/**/*.tsx
+
+# Keep this line after the /*.ts rules in order to not cancel it
+!src/**/*.d.ts

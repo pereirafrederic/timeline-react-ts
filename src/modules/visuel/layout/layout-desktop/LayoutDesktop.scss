@@ -1,0 +1,40 @@
+@import '../../modules/visuel/mixin/sizes.scss';
+.LayoutDesktop {
+  flex-direction: row;
+
+  .LayoutDesktop__left {
+    width: calc(100% - #{$sizeRightPaneWidth} - #{$sizeSpace4});
+    margin-right: $sizeSpace4;
+    align-self: flex-start;
+    // position: sticky;
+    // top: $sizeSpace4;
+  }
+
+  .LayoutDesktop__right {
+    width: $sizeRightPaneWidth;
+    align-self: flex-start;
+    // position: sticky;
+    // top: $sizeSpace4;
+  }
+
+  .LayoutDesktopColumns {
+    flex-direction: row;
+
+    .LayoutDesktopColumns__left {
+      width: calc(50% - #{$sizeSpace4 / 2});
+      margin-right: $sizeSpace4;
+    }
+
+    .LayoutDesktopColumns__right {
+      width: calc(50% - #{$sizeSpace4 / 2});
+    }
+
+    .Block {
+      flex-grow: 1;
+    }
+  }
+
+  .Block {
+    margin-bottom: $sizeSpace4;
+  }
+}

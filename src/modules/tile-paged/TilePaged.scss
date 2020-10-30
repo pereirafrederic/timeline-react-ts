@@ -1,0 +1,45 @@
+@import '../../modules/visuel/mixin/sizes.scss';
+
+.TilePaged {
+  .TilePaged__paginator {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: $sizeSpace3;
+
+    .TilePaged__paginator__icon {
+      width: $sizeSpace6;
+      height: $sizeSpace6;
+      fill: $primary-color;
+
+      &.primary {
+        &:hover {
+          box-shadow: 0px 0px 0px $sizeSpace1 $colorButtonDarkShadow;
+        }
+      }
+    }
+    .TilePaged__paginator__dots {
+      flex-direction: row;
+      justify-content: center;
+      padding: 0;
+      .TilePaged__paginator__dot {
+        align-items: center;
+        align-self: center;
+        width: $sizeSpace3;
+        height: $sizeSpace3;
+        border-radius: 100%;
+        margin: $sizeSpace3;
+        background-color: $primary-color;
+        &:hover {
+          border: $sizeSpace1 solid $primary-color;
+          box-shadow: 0px 0px 0px $sizeSpace1 $colorButtonDarkShadow;
+        }
+        &.primary {
+          border: $sizeSpace1 solid $primary-color;
+          background-color: $colorAccent;
+          box-shadow: 0px 0px 0px $sizeSpace1 $colorButtonDarkShadow;
+        }
+      }
+    }
+  }
+}

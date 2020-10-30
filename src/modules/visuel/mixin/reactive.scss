@@ -1,0 +1,32 @@
+@mixin reactiveIconCircle($size, $colorHover, $colorFocus) {
+  position: relative;
+  z-index: 0;
+  &:before {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0px);
+    width: $size;
+    height: $size;
+
+    border-radius: 100%;
+  }
+  &:hover:before {
+    background-color: $colorHover;
+  }
+  &:focus:before {
+    background-color: $colorFocus;
+  }
+  -webkit-tap-highlight-color: $colorFocus;
+}
+
+@mixin reactiveTile() {
+  cursor: pointer;
+  transition: padding-left 150ms, border-left-width 150ms, box-shadow 150ms;
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 0px 4px rgba(white, 0.3);
+  }
+}
